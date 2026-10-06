@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Lora, Figtree } from "next/font/google";
+import { SessionProvider } from "@/lib/api/auth/session-provider";
+import { QueryProvider } from "@/lib/query/provider";
 import "./globals.css";
 
 const lora = Lora({
@@ -23,7 +25,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${lora.variable} ${figtree.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      {/* The provider wraps children rather than <html>, so the static parts of the
+          document stay outside the client boundary. */}
+      <body className="min-h-full flex flex-col font-sans">
+        <QueryProvider>
+          <SessionProvider>{children}</SessionProvider>
+        </QueryProvider>
+      </body>
     </html>
   );
 }

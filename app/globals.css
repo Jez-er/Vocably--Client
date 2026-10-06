@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+/* Compact density: a short viewport (every MacBook Air lands at ~745-870px
+   tall) or a phone-width one. Screens tighten their vertical rhythm here
+   instead of scrolling. Only vertical properties use this variant, and they
+   never also use a width breakpoint, so the two ramps can never fight over the
+   same declaration. */
+@custom-variant compact {
+  @media (max-height: 880px) {
+    @slot;
+  }
+  @media (max-width: 639px) {
+    @slot;
+  }
+}
+
 :root {
   /* Base */
   --background: #f7f4ee;
@@ -20,6 +34,9 @@
   --amber: #c48a3f;
   --sand: #f3e3c8;
   --sand-text: #6b4a17;
+
+  /* Feedback */
+  --danger: #8c3a2b;
 }
 
 @theme inline {
@@ -39,6 +56,8 @@
   --color-amber: var(--amber);
   --color-sand: var(--sand);
   --color-sand-text: var(--sand-text);
+
+  --color-danger: var(--danger);
 
   --font-sans: var(--font-figtree);
   --font-serif: var(--font-lora);
