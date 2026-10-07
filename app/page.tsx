@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import {
-  buttonBaseClass,
-  buttonSizeClass,
-  buttonVariantClass,
-} from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -21,12 +16,9 @@ export default function Home() {
         </p>
       </div>
 
-      <Link
-        href="/login"
-        className={cn(buttonBaseClass, buttonVariantClass.primary, buttonSizeClass.md)}
-      >
-        Start practice
-      </Link>
+      <Button asChild>
+        <Link href="/login">Start practice</Link>
+      </Button>
     </main>
   );
 }

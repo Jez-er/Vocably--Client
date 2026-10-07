@@ -16,7 +16,7 @@ export function GoogleButton({ className }: { className?: string }) {
       onClick={handleClick}
     >
       Continue with Google
-      <GoogleIcon className="h-5 w-5" />
+      <GoogleIcon className="size-5" />
     </Button>
   );
 }
