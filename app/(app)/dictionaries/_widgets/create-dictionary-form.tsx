@@ -2,10 +2,9 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/ui/form-error";
-import { Select } from "@/components/ui/select";
 import {
   applyFieldErrors,
   isApiError,
@@ -18,6 +17,7 @@ import {
   createDictionarySchema,
   type CreateDictionaryValues,
 } from "@/lib/validations/dictionary";
+import { LanguageCombobox } from "./language-combobox";
 
 const FIELDS = ["languageCode"] as const;
 
@@ -38,7 +38,7 @@ export function CreateDictionaryForm({
 }: CreateDictionaryFormProps) {
   const queryClient = useQueryClient();
   const {
-    register,
+    control,
     handleSubmit,
     setError,
     formState: { errors },
@@ -114,22 +114,24 @@ export function CreateDictionaryForm({
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-5 compact:gap-4"
       >
-        <Select
-          id="dictionary-language"
-          label="Language"
-          error={errors.languageCode?.message}
-          defaultValue=""
-          {...register("languageCode")}
-        >
-          <option value="" disabled>
-            Choose a language
-          </option>
-          {languages.map((language) => (
-            <option key={language.code} value={language.code}>
-              {language.flag ? `${language.flag} ${language.title}` : language.title}
-            </option>
-          ))}
-        </Select>
+        {/* A combobox is not a native form control, so it goes through Controller rather than
+            register(). */}
+        <Controller
+          control={control}
+          name="languageCode"
+          render={({ field }) => (
+            <LanguageCombobox
+              id="dictionary-language"
+              label="Language"
+              languages={languages}
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              error={errors.languageCode?.message}
+              disabled={isPending}
+            />
+          )}
+        />
         <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
           <Button variant="outline" onClick={onCancel} disabled={isPending}>
             Cancel
