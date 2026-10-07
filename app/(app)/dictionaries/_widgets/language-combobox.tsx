@@ -16,7 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import type { LanguageResponse } from "@/shared/api";
+import type { LanguageComboboxProps } from "@/types/dictionaries";
 
 /**
  * A searchable language picker.
@@ -33,18 +33,6 @@ import type { LanguageResponse } from "@/shared/api";
  * It lives here rather than in components/ui because it is tied to this one form; the Popover
  * and Command primitives underneath it are the shared parts.
  */
-export type LanguageComboboxProps = {
-  /** Required: ties the label and the aria-describedby ids together. */
-  id: string;
-  label: string;
-  languages: LanguageResponse[];
-  value: string;
-  onChange: (languageCode: string) => void;
-  onBlur?: () => void;
-  error?: string;
-  disabled?: boolean;
-};
-
 export function LanguageCombobox({
   id,
   label,

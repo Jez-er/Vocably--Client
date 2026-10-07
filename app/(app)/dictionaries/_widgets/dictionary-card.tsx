@@ -1,10 +1,10 @@
-import type { DictionaryCard as DictionaryCardData } from "@/shared/api/dictionaries/view";
+import type { DictionaryCardProps } from "@/types/dictionaries";
 
 export function DictionaryCard({
   title,
   flag,
   wordCount,
-}: Omit<DictionaryCardData, "id" | "languageCode">) {
+}: DictionaryCardProps) {
   return (
     <article className="flex h-full flex-col gap-5 rounded-stat border border-border bg-surface p-6">
       <div className="flex items-center gap-3">

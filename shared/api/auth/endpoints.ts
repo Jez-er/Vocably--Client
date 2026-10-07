@@ -1,12 +1,12 @@
 import { http } from "@/shared/api/core/http";
 import { publicRequest } from "@/shared/api/core/request-context";
-import type { Endpoint, SimpleEndpoint } from "@/shared/api/core/types";
+import type { Endpoint, SimpleEndpoint } from "@/types/api/core";
 import type {
   AuthResponse,
   LoginRequest,
   RegisterRequest,
   Tokens,
-} from "@/shared/api/auth/types";
+} from "@/types/api/auth";
 
 
 export const register: Endpoint<RegisterRequest, AuthResponse> = ({

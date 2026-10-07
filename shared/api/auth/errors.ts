@@ -1,6 +1,6 @@
+import type { AuthIntent } from "@/types/api/auth";
 import { isApiError } from "@/shared/api/core/errors";
 
-export type AuthIntent = "login" | "register";
 
 export function resolveAuthErrorMessage(
   error: unknown,

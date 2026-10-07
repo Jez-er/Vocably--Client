@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import type { TextFieldProps } from "@/types/ui/text-field";
 
 /**
  * A labelled field, composed from shadcn's Input and Label.
@@ -10,21 +11,6 @@ import { cn } from "@/lib/utils";
  * `trailing` slot positions against, the error paragraph, and the aria-describedby id joining.
  * Five forms would otherwise repeat all four.
  */
-export type TextFieldProps = Omit<
-  React.ComponentProps<"input">,
-  "className"
-> & {
-  /** Required: ties the <label> and the aria-describedby ids together. */
-  id: string;
-  label: string;
-  error?: string;
-  hint?: string;
-  /** Rendered inside the field box, against its right edge. */
-  trailing?: React.ReactNode;
-  /** Wrapper layout only — the input's own styling is not overridable. */
-  className?: string;
-};
-
 export function TextField({
   id,
   label,

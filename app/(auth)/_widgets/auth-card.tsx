@@ -1,9 +1,4 @@
-export type AuthCardProps = {
-  title: string;
-  subtitle?: React.ReactNode;
-  children: React.ReactNode;
-  footer?: React.ReactNode;
-};
+import type { AuthCardProps } from "@/types/auth";
 
 export function AuthCard({ title, subtitle, children, footer }: AuthCardProps) {
   return (

@@ -1,6 +1,6 @@
+import type { ApiErrorKind } from "@/types/api/core";
 import { ResponseError, type NotFetchResponse } from "@astralis-os/notfetch";
 
-export type ApiErrorKind = "network" | "http" | "unknown";
 
 /**
  * The single error type the whole data layer throws.

@@ -2,7 +2,7 @@ import { queryOptions } from "@tanstack/react-query";
 import { refreshAccessToken } from "@/shared/api/core/client";
 import { hasPersistedSession, readPersistedUser } from "@/shared/api/core/tokens";
 import { queryKeys } from "@/shared/query/keys";
-import type { User } from "@/shared/api/auth/types";
+import type { User } from "@/types/api/auth";
 
 export const sessionQuery = () =>
   queryOptions({

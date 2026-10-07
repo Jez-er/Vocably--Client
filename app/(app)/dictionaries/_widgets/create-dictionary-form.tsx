@@ -10,8 +10,8 @@ import {
   isApiError,
   resolveDictionaryErrorMessage,
   useCreateDictionary,
-  type LanguageResponse,
 } from "@/shared/api";
+import type { CreateDictionaryFormProps } from "@/types/dictionaries";
 import { queryKeys } from "@/shared/query/keys";
 import {
   createDictionarySchema,
@@ -20,14 +20,6 @@ import {
 import { LanguageCombobox } from "./language-combobox";
 
 const FIELDS = ["languageCode"] as const;
-
-export type CreateDictionaryFormProps = {
-  languages: LanguageResponse[];
-  isLanguagesPending: boolean;
-  languagesError: unknown;
-  onCancel: () => void;
-  onCreated: () => void;
-};
 
 export function CreateDictionaryForm({
   languages,

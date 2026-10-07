@@ -1,6 +1,6 @@
 import type { NotFetchInstance } from "@astralis-os/notfetch";
 import { tokenStore } from "@/shared/api/core/tokens";
-import type { AuthAwareConfig } from "@/shared/api/core/types";
+import type { AuthAwareConfig } from "@/types/api/core";
 
 /**
  * Attaches credentials and the Bearer token.

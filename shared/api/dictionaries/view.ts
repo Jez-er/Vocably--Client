@@ -1,6 +1,9 @@
-import type { DictionaryResponse } from "@/shared/api/dictionaries/types";
-import type { LanguageResponse } from "@/shared/api/languages/types";
-import type { WordResponse } from "@/shared/api/words/types";
+import type {
+  DictionaryResponse,
+  DictionaryView,
+} from "@/types/api/dictionaries";
+import type { LanguageResponse } from "@/types/api/languages";
+import type { WordResponse } from "@/types/api/words";
 
 /**
  * Pure derivations for the dictionaries page. No React, no React Query.
@@ -9,15 +12,6 @@ import type { WordResponse } from "@/shared/api/words/types";
  * languageCode}, so everything the UI shows is a join across three endpoints — and a join across
  * three cache entries cannot honestly live in any single query's `select`.
  */
-
-/** What a dictionary card renders. `wordCount: null` means "not known", never "zero". */
-export type DictionaryCard = {
-  id: string;
-  languageCode: string;
-  title: string;
-  flag: string;
-  wordCount: number | null;
-};
 
 export function countWordsByDictionary(
   words: readonly WordResponse[],
@@ -42,7 +36,7 @@ export function toDictionaryCards(
   dictionaries: readonly DictionaryResponse[],
   languages: readonly LanguageResponse[],
   wordCounts: Map<string, number> | null,
-): DictionaryCard[] {
+): DictionaryView[] {
   const byCode = new Map(languages.map((language) => [language.code, language]));
 
   return dictionaries.map((dictionary) => {

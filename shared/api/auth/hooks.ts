@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { login, logout, register } from "@/shared/api/auth/endpoints";
 import { sessionQuery } from "@/shared/api/auth/queries";
-import type { AuthResponse, LoginRequest, RegisterRequest } from "@/shared/api/auth/types";
+import type { AuthResponse, LoginRequest, RegisterRequest } from "@/types/api/auth";
 import { persistUser, tokenStore } from "@/shared/api/core/tokens";
 import { queryKeys } from "@/shared/query/keys";
 

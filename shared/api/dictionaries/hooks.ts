@@ -6,15 +6,15 @@ import { dictionariesQuery } from "@/shared/api/dictionaries/queries";
 import type {
   DictionaryCreateRequest,
   DictionaryResponse,
-} from "@/shared/api/dictionaries/types";
+  DictionaryView,
+} from "@/types/api/dictionaries";
 import {
   availableLanguages,
   countWordsByDictionary,
   toDictionaryCards,
-  type DictionaryCard,
 } from "@/shared/api/dictionaries/view";
 import { languagesQuery } from "@/shared/api/languages/queries";
-import type { LanguageResponse } from "@/shared/api/languages/types";
+import type { LanguageResponse } from "@/types/api/languages";
 import { wordsQuery } from "@/shared/api/words/queries";
 import { queryKeys } from "@/shared/query/keys";
 
@@ -34,7 +34,7 @@ export function useDictionaries() {
  * unavailable" instead of blocking the page or claiming every dictionary is empty.
  */
 export function useDictionaryCards(): {
-  cards: DictionaryCard[];
+  cards: DictionaryView[];
   languages: LanguageResponse[];
   isPending: boolean;
   error: unknown;

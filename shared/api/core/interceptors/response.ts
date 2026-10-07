@@ -6,7 +6,7 @@ import type {
 import { isMaskedServerError, toApiError } from "@/shared/api/core/errors";
 import { createRefresher } from "@/shared/api/core/interceptors/refresh";
 import { tokenStore } from "@/shared/api/core/tokens";
-import type { AuthAwareConfig } from "@/shared/api/core/types";
+import type { AuthAwareConfig } from "@/types/api/core";
 
 /**
  * Normalises failures and refreshes the access token on a 401.

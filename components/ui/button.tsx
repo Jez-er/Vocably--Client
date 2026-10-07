@@ -1,7 +1,8 @@
 import * as React from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva } from "class-variance-authority";
 import { Slot } from "radix-ui";
 import { cn } from "@/lib/utils";
+import type { ButtonProps } from "@/types/ui/button";
 
 /**
  * shadcn's Button, restyled to style-quide.md §6.
@@ -42,9 +43,6 @@ const buttonVariants = cva(
     defaultVariants: { variant: "default", size: "default" },
   },
 );
-
-export type ButtonProps = React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & { asChild?: boolean };
 
 function Button({
   className,

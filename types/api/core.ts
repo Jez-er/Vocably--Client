@@ -34,3 +34,6 @@ export type Endpoint<Params, Result> = ApiNotFetchRequest<Params, Result>;
  * that conditional resolves to a *required* argument for `undefined` and would force `logout({})`.
  */
 export type SimpleEndpoint<Result> = (config?: RequestOptions) => Promise<Result>;
+
+/** How an ApiError arose: no response at all, an HTTP status, or something unclassified. */
+export type ApiErrorKind = "network" | "http" | "unknown";

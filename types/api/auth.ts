@@ -35,3 +35,6 @@ export type RegisterRequest = {
   displayName: string;
   password: string;
 };
+
+/** Which auth call produced an error, so the copy can name the right action. */
+export type AuthIntent = "login" | "register";

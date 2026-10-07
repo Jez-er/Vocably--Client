@@ -1,6 +1,6 @@
 import { http } from "@/shared/api/core/http";
-import type { SimpleEndpoint } from "@/shared/api/core/types";
-import type { LanguageResponse } from "@/shared/api/languages/types";
+import type { SimpleEndpoint } from "@/types/api/core";
+import type { LanguageResponse } from "@/types/api/languages";
 
 /**
  * The language catalogue.

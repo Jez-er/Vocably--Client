@@ -1,6 +1,6 @@
+import type { DictionaryIntent } from "@/types/api/dictionaries";
 import { isApiError } from "@/shared/api/core/errors";
 
-export type DictionaryIntent = "list" | "create";
 
 /**
  * Turn an ApiError into copy a user can act on, or null when the caller handles it better itself.

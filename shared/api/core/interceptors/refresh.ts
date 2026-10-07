@@ -1,6 +1,6 @@
 import type { NotFetchInstance } from "@astralis-os/notfetch";
 import { tokenStore } from "@/shared/api/core/tokens";
-import type { Tokens } from "@/shared/api/auth/types";
+import type { Tokens } from "@/types/api/auth";
 
 /**
  * Single-flight access-token refresh.

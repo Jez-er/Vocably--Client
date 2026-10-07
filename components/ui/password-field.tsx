@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { TextField, type TextFieldProps } from "@/components/ui/text-field";
-
-export type PasswordFieldProps = Omit<TextFieldProps, "type" | "trailing">;
+import { TextField } from "@/components/ui/text-field";
+import type { PasswordFieldProps } from "@/types/ui/text-field";
 
 export function PasswordField(props: PasswordFieldProps) {
   const [visible, setVisible] = useState(false);

@@ -1,4 +1,4 @@
-import type { User } from "@/shared/api/auth/types";
+import type { User } from "@/types/api/auth";
 
 /**
  * Access-token and session storage. Browser-only.

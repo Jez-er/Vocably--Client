@@ -1,9 +1,9 @@
 import { http } from "@/shared/api/core/http";
-import type { Endpoint, SimpleEndpoint } from "@/shared/api/core/types";
+import type { Endpoint, SimpleEndpoint } from "@/types/api/core";
 import type {
   DictionaryCreateRequest,
   DictionaryResponse,
-} from "@/shared/api/dictionaries/types";
+} from "@/types/api/dictionaries";
 
 /**
  * The dictionary endpoints. Unlike /auth/**, these are authenticated — no `publicRequest`, so the
