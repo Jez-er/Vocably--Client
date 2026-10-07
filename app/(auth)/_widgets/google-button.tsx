@@ -1,6 +1,6 @@
 "use client";
 
-import { GoogleIcon } from "@/components/icons";
+import { GoogleIcon } from "@/components/ui/icons/google-icon";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 

@@ -1,4 +1,4 @@
-import { SproutIcon } from "@/components/icons";
+import { Sprout } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // Static lookup tables: Tailwind cannot see runtime-interpolated class names.
@@ -20,7 +20,7 @@ export function Logo({ size = "nav", className }: LogoProps) {
           MARK[size],
         )}
       >
-        <SproutIcon className={cn("text-white", ICON[size])} />
+        <Sprout aria-hidden="true" className={cn("text-white", ICON[size])} />
       </span>
       <span className={cn("font-serif font-bold leading-none", WORD[size])}>
         Vocably

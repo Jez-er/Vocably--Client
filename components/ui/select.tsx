@@ -1,4 +1,4 @@
-import { ChevronDownIcon } from "@/components/icons";
+import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -60,7 +60,7 @@ export function Select({
         >
           {children}
         </select>
-        <ChevronDownIcon className="pointer-events-none absolute top-1/2 right-[18px] h-5 w-5 -translate-y-1/2 text-muted" />
+        <ChevronDown aria-hidden="true" className="pointer-events-none absolute top-1/2 right-[18px] h-5 w-5 -translate-y-1/2 text-muted" />
       </div>
 
       {error && (

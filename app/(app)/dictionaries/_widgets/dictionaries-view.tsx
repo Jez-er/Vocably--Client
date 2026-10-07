@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { CreateDictionaryForm } from "./create-dictionary-form";
 import { DictionaryCard } from "./dictionary-card";
-import { SproutIcon } from "@/components/icons";
+import { Sprout } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";
 import { FormError } from "@/components/ui/form-error";
@@ -120,7 +120,7 @@ function EmptyState({ onAdd }: { onAdd: () => void }) {
   return (
     <div className="mt-7 flex flex-col items-start gap-5 rounded-hero border border-border bg-surface px-8 py-10 compact:mt-5 compact:py-7">
       <span className="flex h-12 w-12 items-center justify-center rounded-field bg-brand-tint">
-        <SproutIcon className="h-6 w-6 text-primary" />
+        <Sprout aria-hidden="true" className="h-6 w-6 text-primary" />
       </span>
       <div className="flex flex-col gap-1.5">
         <h2 className="font-serif text-[22px] font-semibold">
