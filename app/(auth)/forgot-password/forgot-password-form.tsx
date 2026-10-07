@@ -25,10 +25,6 @@ export function ForgotPasswordForm() {
   });
 
   const onSubmit = async (values: ForgotPasswordValues) => {
-    // TODO(server): there is still no password-reset endpoint (the server exposes only
-    // /api/auth/{register,login,refresh,logout}). Once POST /api/auth/forgot-password { email }
-    // exists, add it to lib/api/auth/endpoints.ts and call it through a mutation here, the way
-    // login-form.tsx does.
     setSentTo(values.email);
   };
 

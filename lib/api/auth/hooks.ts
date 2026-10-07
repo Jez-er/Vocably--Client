@@ -8,13 +8,13 @@ import type { AuthResponse, LoginRequest, RegisterRequest } from "@/lib/api/auth
 import { persistUser, tokenStore } from "@/lib/api/core/tokens";
 import { queryKeys } from "@/lib/query/keys";
 
-/** The logged-in user, or null. `isPending` is false for a visitor who has never logged in. */
 export function useSession() {
   const query = useQuery(sessionQuery());
 
   return {
     user: query.data ?? null,
     isLoading: query.isLoading,
+    isResolving: query.isEnabled && query.isPending,
     isAuthenticated: Boolean(query.data),
   };
 }
@@ -56,11 +56,9 @@ export function useLogout() {
 
   return useMutation({
     mutationFn: () => logout(),
-    // Clear locally either way: a failed logout request must not leave the UI logged in.
     onSettled: () => {
       tokenStore.clear();
-      queryClient.setQueryData(queryKeys.auth.session(), null);
-      queryClient.removeQueries({ queryKey: queryKeys.auth.root });
+      queryClient.clear();
       router.push("/login");
     },
   });

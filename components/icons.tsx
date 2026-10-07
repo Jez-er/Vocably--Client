@@ -27,6 +27,14 @@ export function SproutIcon(props: IconProps) {
   );
 }
 
+export function ChevronDownIcon(props: IconProps) {
+  return (
+    <LineIcon {...props}>
+      <path d="m6 9 6 6 6-6" />
+    </LineIcon>
+  );
+}
+
 export function EyeIcon(props: IconProps) {
   return (
     <LineIcon {...props}>

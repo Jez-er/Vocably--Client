@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import { buttonBaseClass, buttonVariantClass } from "@/components/ui/button";
+import {
+  buttonBaseClass,
+  buttonSizeClass,
+  buttonVariantClass,
+} from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export default function Home() {
@@ -19,7 +23,7 @@ export default function Home() {
 
       <Link
         href="/login"
-        className={cn(buttonBaseClass, buttonVariantClass.primary)}
+        className={cn(buttonBaseClass, buttonVariantClass.primary, buttonSizeClass.md)}
       >
         Start practice
       </Link>

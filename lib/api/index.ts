@@ -40,3 +40,33 @@ export type {
   Tokens,
   User,
 } from "@/lib/api/auth/types";
+
+export * as dictionariesApi from "@/lib/api/dictionaries/endpoints";
+export {
+  resolveDictionaryErrorMessage,
+  type DictionaryIntent,
+} from "@/lib/api/dictionaries/errors";
+export {
+  useCreateDictionary,
+  useDictionaries,
+  useDictionaryCards,
+} from "@/lib/api/dictionaries/hooks";
+export { dictionariesQuery } from "@/lib/api/dictionaries/queries";
+export type {
+  DictionaryCreateRequest,
+  DictionaryResponse,
+} from "@/lib/api/dictionaries/types";
+export {
+  availableLanguages,
+  countWordsByDictionary,
+  toDictionaryCards,
+  type DictionaryCard,
+} from "@/lib/api/dictionaries/view";
+
+export * as languagesApi from "@/lib/api/languages/endpoints";
+export { languagesQuery } from "@/lib/api/languages/queries";
+export type { LanguageResponse } from "@/lib/api/languages/types";
+
+export * as wordsApi from "@/lib/api/words/endpoints";
+export { wordsQuery } from "@/lib/api/words/queries";
+export type { WordResponse, WordStatus } from "@/lib/api/words/types";

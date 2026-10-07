@@ -21,11 +21,19 @@ export class ApiError extends Error {
   /** The `message` field. Only the 401 body carries one. */
   readonly serverMessage?: string;
   /**
+   * The server's machine-readable `ErrorCode` — VALIDATION_FAILED, CONFLICT, NOT_FOUND and so on.
+   *
+   * Several distinct failures share a status (409 is both CONFLICT and EMAIL_ALREADY_USED), so this
+   * disambiguates them. Branch on `status` first and use `code` only to narrow: an intermediary
+   * error page or a rollback leaves it undefined.
+   */
+  readonly code?: string;
+  /**
    * Per-field validation messages, keyed by form field name.
    *
-   * Always empty against the current server: it has no @ControllerAdvice, and Boot's
-   * `include-binding-errors` default of `never` strips binding errors from the 400 body. Kept so
-   * forms can wire up field mapping now and have it start working when the server is fixed.
+   * These now populate: the server has a @RestControllerAdvice that maps
+   * MethodArgumentNotValidException to real per-field messages on a 400 VALIDATION_FAILED. The key
+   * is the Java record component name, so a form field has to be named to match it.
    */
   readonly fieldErrors: Record<string, string>;
 
@@ -37,6 +45,7 @@ export class ApiError extends Error {
       statusText?: string;
       path?: string;
       serverMessage?: string;
+      code?: string;
       fieldErrors?: Record<string, string>;
       cause?: unknown;
     },
@@ -48,6 +57,7 @@ export class ApiError extends Error {
     this.statusText = init.statusText;
     this.path = init.path;
     this.serverMessage = init.serverMessage;
+    this.code = init.code;
     this.fieldErrors = init.fieldErrors ?? {};
   }
 }
@@ -80,6 +90,7 @@ type ServerErrorBody = {
   status?: number;
   error?: string;
   message?: string;
+  code?: string;
   path?: string;
   fieldErrors?: Record<string, string>;
 };
@@ -108,6 +119,7 @@ export function apiErrorFromResponse(
       statusText,
       path: body.path ?? response.url,
       serverMessage: body.message,
+      code: body.code,
       fieldErrors: body.fieldErrors,
     },
   );
@@ -146,7 +158,7 @@ export function toApiError(error: unknown): ApiError {
  * Push an ApiError's field errors into a react-hook-form `setError`.
  *
  * Returns true when it handled at least one field, so a caller can fall back to a form-level
- * message. Against the current server this always returns false — see ApiError.fieldErrors.
+ * message.
  */
 export function applyFieldErrors<Field extends string>(
   error: unknown,

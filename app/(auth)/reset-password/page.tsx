@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { AuthCard } from "@/components/auth/auth-card";
-import { buttonBaseClass, buttonVariantClass } from "@/components/ui/button";
+import {
+  buttonBaseClass,
+  buttonSizeClass,
+  buttonVariantClass,
+} from "@/components/ui/button";
 import { TextLink } from "@/components/ui/text-link";
 import { cn } from "@/lib/utils";
 import { ResetPasswordForm } from "./reset-password-form";
@@ -29,6 +33,7 @@ export default async function ResetPasswordPage({
           className={cn(
             buttonBaseClass,
             buttonVariantClass.primary,
+            buttonSizeClass.md,
             "w-full",
           )}
         >

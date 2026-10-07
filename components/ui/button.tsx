@@ -2,19 +2,34 @@ import { cn } from "@/lib/utils";
 
 export type ButtonProps = React.ComponentProps<"button"> & {
   variant?: "primary" | "outline";
+  size?: "md" | "sm";
 };
 
-// Exported so a <Link> can borrow the look without turning into a <button>.
+// Exported so a <Link> can borrow the look without turning into a <button>. A <Link> must compose
+// all three: base + variant + size.
 export const buttonBaseClass =
-  "inline-flex h-[52px] items-center justify-center gap-3 rounded-button px-6 text-base font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex items-center justify-center gap-3 rounded-button font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-60";
 
 export const buttonVariantClass = {
   primary: "bg-primary text-white hover:brightness-95",
   outline: "border border-border bg-surface text-foreground hover:bg-background",
 } as const;
 
+/**
+ * Size is a lookup map, not something a caller passes through `className`.
+ *
+ * `cn()` is a bare join with no tailwind-merge, so a `className="h-12"` would land alongside
+ * `h-[52px]` and the winner would be decided by the generated stylesheet's order rather than by
+ * the call site. "sm" is 48px — the style guide's minimum touch target.
+ */
+export const buttonSizeClass = {
+  md: "h-[52px] px-6 text-base",
+  sm: "h-12 px-5 text-[15px]",
+} as const;
+
 export function Button({
   variant = "primary",
+  size = "md",
   type = "button",
   className,
   ...props
@@ -22,7 +37,12 @@ export function Button({
   return (
     <button
       type={type}
-      className={cn(buttonBaseClass, buttonVariantClass[variant], className)}
+      className={cn(
+        buttonBaseClass,
+        buttonVariantClass[variant],
+        buttonSizeClass[size],
+        className,
+      )}
       {...props}
     />
   );

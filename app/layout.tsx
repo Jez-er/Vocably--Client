@@ -25,8 +25,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${lora.variable} ${figtree.variable} h-full antialiased`}
     >
-      {/* The provider wraps children rather than <html>, so the static parts of the
-          document stay outside the client boundary. */}
       <body className="min-h-full flex flex-col font-sans">
         <QueryProvider>
           <SessionProvider>{children}</SessionProvider>

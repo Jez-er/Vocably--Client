@@ -29,8 +29,6 @@ export function LoginForm() {
 
   const onSubmit = (values: LoginValues) =>
     mutate(values, {
-      // Attach anything field-specific to the field itself and let the rest fall through to the
-      // alert region. The server sends no field errors today, so in practice this is the alert.
       onError: (cause) => {
         applyFieldErrors(cause, setError, FIELDS);
       },

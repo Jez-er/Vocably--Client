@@ -7,7 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function ForgotPasswordPage() {
-  // The AuthCard lives inside the client component here, unlike the other auth
-  // pages: this card's own title changes once the link has been sent.
   return <ForgotPasswordForm />;
 }
