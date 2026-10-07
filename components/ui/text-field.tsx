@@ -1,5 +1,15 @@
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
+/**
+ * A labelled field, composed from shadcn's Input and Label.
+ *
+ * Kept as a wrapper rather than replaced by Input + Label at each call site, because it carries
+ * four things neither primitive provides: the hint on the label row, the relative box that the
+ * `trailing` slot positions against, the error paragraph, and the aria-describedby id joining.
+ * Five forms would otherwise repeat all four.
+ */
 export type TextFieldProps = Omit<
   React.ComponentProps<"input">,
   "className"
@@ -33,11 +43,10 @@ export function TextField({
     undefined;
 
   return (
+    // gap-2 is the guide's 8px label-to-field gap (§6).
     <div className={cn("flex flex-col gap-2", className)}>
       <div className="flex items-baseline justify-between gap-3">
-        <label htmlFor={id} className="text-base font-medium text-foreground">
-          {label}
-        </label>
+        <Label htmlFor={id}>{label}</Label>
         {hint && (
           <span id={hintId} className="text-sm text-muted-foreground">
             {hint}
@@ -46,15 +55,12 @@ export function TextField({
       </div>
 
       <div className="relative">
-        <input
+        <Input
           {...props}
           id={id}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy}
-          className={cn(
-            "h-[52px] w-full rounded-field border border-border bg-surface-input px-[18px] text-base text-foreground placeholder:text-placeholder focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary aria-invalid:border-danger",
-            trailing ? "pr-[52px]" : undefined,
-          )}
+          className={trailing ? "pr-[52px]" : undefined}
         />
         {trailing}
       </div>
