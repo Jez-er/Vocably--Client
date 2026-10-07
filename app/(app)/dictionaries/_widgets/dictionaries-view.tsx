@@ -35,13 +35,13 @@ export function DictionariesView() {
     <>
       <header className="flex flex-wrap items-end justify-between gap-5">
         <div className="flex flex-col gap-1.5">
-          <p className="text-[13px] font-semibold tracking-[0.12em] text-muted uppercase">
+          <p className="text-[13px] font-semibold tracking-[0.12em] text-muted-foreground uppercase">
             Your garden
           </p>
           <h1 className="font-serif text-[32px] leading-tight font-semibold sm:text-[38px]">
             Dictionaries
           </h1>
-          <p className="text-base text-muted">
+          <p className="text-base text-muted-foreground">
             Pick a language to tend, or plant a new one.
           </p>
         </div>
@@ -126,7 +126,7 @@ function EmptyState({ onAdd }: { onAdd: () => void }) {
         <h2 className="font-serif text-[22px] font-semibold">
           Plant your first dictionary
         </h2>
-        <p className="max-w-[46ch] text-base text-muted">
+        <p className="max-w-[46ch] text-base text-muted-foreground">
           Choose a language and start collecting the words you want to grow.
         </p>
       </div>

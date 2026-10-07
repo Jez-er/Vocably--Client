@@ -13,13 +13,13 @@ export function AuthCard({ title, subtitle, children, footer }: AuthCardProps) {
         <h1 className="font-serif text-[26px] font-semibold leading-tight sm:text-[30px]">
           {title}
         </h1>
-        {subtitle && <p className="text-base text-muted">{subtitle}</p>}
+        {subtitle && <p className="text-base text-muted-foreground">{subtitle}</p>}
       </header>
 
       <div className="mt-7 compact:mt-5">{children}</div>
 
       {footer && (
-        <div className="mt-6 text-center text-[15px] text-muted compact:mt-3">{footer}</div>
+        <div className="mt-6 text-center text-[15px] text-muted-foreground compact:mt-3">{footer}</div>
       )}
     </section>
   );

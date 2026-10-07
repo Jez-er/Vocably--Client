@@ -19,7 +19,7 @@ export function PasswordField(props: PasswordFieldProps) {
           onClick={() => setVisible((previous) => !previous)}
           aria-label={visible ? "Hide password" : "Show password"}
           aria-pressed={visible}
-          className="absolute inset-y-0 right-0 flex w-[52px] items-center justify-center rounded-field text-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="absolute inset-y-0 right-0 flex w-[52px] items-center justify-center rounded-field text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           {visible ? (
             <EyeOff aria-hidden="true" className="h-5 w-5" />

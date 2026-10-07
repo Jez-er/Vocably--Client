@@ -89,13 +89,13 @@ export function CreateDictionaryForm({
   }
 
   if (isLanguagesPending) {
-    return <p className="text-base text-muted">Loading languages…</p>;
+    return <p className="text-base text-muted-foreground">Loading languages…</p>;
   }
 
   if (languages.length === 0) {
     return (
       <div className="flex flex-col gap-5">
-        <p className="text-base text-muted">
+        <p className="text-base text-muted-foreground">
           You have a dictionary for every language.
         </p>
         <Button variant="outline" onClick={onCancel}>

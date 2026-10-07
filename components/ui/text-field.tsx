@@ -39,7 +39,7 @@ export function TextField({
           {label}
         </label>
         {hint && (
-          <span id={hintId} className="text-sm text-muted">
+          <span id={hintId} className="text-sm text-muted-foreground">
             {hint}
           </span>
         )}

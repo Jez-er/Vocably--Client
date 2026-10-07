@@ -21,10 +21,10 @@ export function DictionaryCard({
       <div className="flex items-baseline gap-2">
         {wordCount === null ? (
           <>
-            <span className="font-serif text-[38px] leading-none font-bold text-muted">
+            <span className="font-serif text-[38px] leading-none font-bold text-muted-foreground">
               —
             </span>
-            <span className="text-[15px] text-muted">words</span>
+            <span className="text-[15px] text-muted-foreground">words</span>
             <span className="sr-only">Word count unavailable</span>
           </>
         ) : (
@@ -32,7 +32,7 @@ export function DictionaryCard({
             <span className="font-serif text-[38px] leading-none font-bold">
               {wordCount}
             </span>
-            <span className="text-[15px] text-muted">
+            <span className="text-[15px] text-muted-foreground">
               {wordCount === 1 ? "word" : "words"}
             </span>
           </>

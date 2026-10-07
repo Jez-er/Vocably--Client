@@ -81,7 +81,7 @@ export function Dialog({
               {title}
             </h2>
             {description && (
-              <p id={descriptionId} className="text-base text-muted">
+              <p id={descriptionId} className="text-base text-muted-foreground">
                 {description}
               </p>
             )}

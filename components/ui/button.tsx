@@ -15,13 +15,7 @@ export const buttonVariantClass = {
   outline: "border border-border bg-surface text-foreground hover:bg-background",
 } as const;
 
-/**
- * Size is a lookup map, not something a caller passes through `className`.
- *
- * `cn()` is a bare join with no tailwind-merge, so a `className="h-12"` would land alongside
- * `h-[52px]` and the winner would be decided by the generated stylesheet's order rather than by
- * the call site. "sm" is 48px — the style guide's minimum touch target.
- */
+/** "sm" is 48px — the style guide's minimum touch target. */
 export const buttonSizeClass = {
   md: "h-[52px] px-6 text-base",
   sm: "h-12 px-5 text-[15px]",

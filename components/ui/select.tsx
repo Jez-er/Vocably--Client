@@ -44,7 +44,7 @@ export function Select({
           {label}
         </label>
         {hint && (
-          <span id={hintId} className="text-sm text-muted">
+          <span id={hintId} className="text-sm text-muted-foreground">
             {hint}
           </span>
         )}
@@ -60,7 +60,7 @@ export function Select({
         >
           {children}
         </select>
-        <ChevronDown aria-hidden="true" className="pointer-events-none absolute top-1/2 right-[18px] h-5 w-5 -translate-y-1/2 text-muted" />
+        <ChevronDown aria-hidden="true" className="pointer-events-none absolute top-1/2 right-[18px] h-5 w-5 -translate-y-1/2 text-muted-foreground" />
       </div>
 
       {error && (

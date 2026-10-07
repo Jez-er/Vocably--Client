@@ -45,7 +45,7 @@ export function ForgotPasswordForm() {
         }
       >
         <div role="status" className="flex flex-col gap-5 compact:gap-3.5">
-          <p className="text-base text-muted">
+          <p className="text-base text-muted-foreground">
             Nothing in your inbox? Give it a minute, then check your spam
             folder.
           </p>

@@ -1,5 +1,8 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
+/* Vocably's own variant: the auth card and the dialog tighten their spacing on short viewports,
+   not just narrow ones. */
 @custom-variant compact {
   @media (max-height: 880px) {
     @slot;
@@ -9,14 +12,18 @@
   }
 }
 
+/* The app is light-only, so this never matches. It is declared anyway because shadcn-generated
+   components carry dark: classes and `shadcn add` re-inserts this line if it is missing. */
+@custom-variant dark (&:is(.dark *));
+
 :root {
-  /* Base */
+  /* --- Vocably palette: the source of truth (style-quide.md §3) ---------------------------- */
   --background: #f7f4ee;
   --foreground: #1f2a1a;
   --surface: #ffffff;
   --surface-input: #f3f0e8;
   --border: #e4e0d4;
-  --muted: #5e6b55;
+  --muted-foreground: #5e6b55;
   --placeholder: #6f7a67;
 
   /* Green scale (brand) */
@@ -32,15 +39,45 @@
 
   /* Feedback */
   --danger: #8c3a2b;
+
+  /* --- shadcn's token contract, expressed in Vocably terms --------------------------------
+     Every name a generated component can emit has to resolve to something here. A name that
+     does not resolve yields an invalid colour, which renders as fully transparent rather than
+     as an error — so this block is the thing that keeps `shadcn add` safe. */
+  --card: var(--surface);
+  --card-foreground: var(--foreground);
+  --popover: var(--surface);
+  --popover-foreground: var(--foreground);
+  --primary-foreground: #ffffff; /* §3: white text only on Primary or Brand */
+  --secondary: var(--brand-tint);
+  --secondary-foreground: var(--primary);
+  --accent: var(--brand-tint); /* §6: Tint is the active/hover fill */
+  --accent-foreground: var(--primary);
+  --destructive: var(--danger);
+  --destructive-foreground: #ffffff;
+  --ring: var(--primary);
+
+  /* Two shadcn names whose meaning is NOT what the Vocably name suggests:
+     - `muted` is a SURFACE in shadcn (bg-muted), while Vocably's muted was a text colour. That
+       is why the text colour above is called --muted-foreground now: one --color-* entry in
+       Tailwind v4 generates the whole utility family, so a single --color-muted cannot be both.
+     - `input` is a BORDER colour in shadcn (border-input), not a field fill. The fill stays
+       --surface-input. */
+  --muted: var(--surface-input);
+  --input: var(--border);
+
+  /* Drives shadcn's rounded-sm/md/lg/xl scale below. 14px is the style guide's button radius,
+     which conveniently makes --radius-md 12px — the guide's input radius. */
+  --radius: 14px;
 }
 
 @theme inline {
+  /* Vocably names */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);
   --color-surface-input: var(--surface-input);
   --color-border: var(--border);
-  --color-muted: var(--muted);
   --color-placeholder: var(--placeholder);
 
   --color-primary: var(--primary);
@@ -54,9 +91,35 @@
 
   --color-danger: var(--danger);
 
+  /* shadcn names */
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted); /* => bg-muted   #f3f0e8 */
+  --color-muted-foreground: var(--muted-foreground); /* => text-muted-foreground  #5e6b55 */
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
   --font-sans: var(--font-figtree);
   --font-serif: var(--font-lora);
 
+  /* shadcn's generic scale, so an un-restyled rounded-md in a generated component lands on the
+     Vocably scale instead of Tailwind's defaults. */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Vocably's named radii (style-quide.md §5). Preferred over the generic scale at call sites,
+     because they state the guide's value rather than deriving it. */
   --radius-field: 12px;
   --radius-button: 14px;
   --radius-stat: 20px;
