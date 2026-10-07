@@ -133,24 +133,9 @@ body {
   font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* --- Modal dialog -------------------------------------------------------- */
-
-/* Declared here rather than through Tailwind's `backdrop:` variant. ::backdrop did not inherit
-   custom properties from :root before Chrome 121 / Safari 17.4 / Firefox 119, and every colour
-   utility resolves through var(--foreground) — on an older engine that silently yields an
-   invalid colour and a fully transparent overlay. */
-dialog::backdrop {
-  background-color: color-mix(in srgb, var(--foreground) 45%, transparent);
-}
-
-/* showModal() makes the background inert but does not stop the page scrolling. Doing it in CSS
-   has no effect until a dialog is open, and no cleanup to get wrong. The root element carries it
-   because layout.tsx puts h-full on <html>. */
-:root:has(dialog[open]) {
-  overflow: hidden;
-}
-
-/* Reserve the scrollbar's space so locking the scroll above does not shift the page sideways. */
+/* Reserve the scrollbar's space. Radix locks the scroll while a dialog is open (via
+   react-remove-scroll, which also pads the body); a stable gutter keeps the page from shifting
+   sideways either way. */
 html {
   scrollbar-gutter: stable;
 }

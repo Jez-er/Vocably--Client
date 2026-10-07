@@ -6,7 +6,13 @@ import { CreateDictionaryForm } from "./create-dictionary-form";
 import { DictionaryCard } from "./dictionary-card";
 import { Sprout } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { FormError } from "@/components/ui/form-error";
 import {
   isApiError,
@@ -75,19 +81,22 @@ export function DictionariesView() {
         </ul>
       )}
 
-      <Dialog
-        open={isAdding}
-        onClose={() => setIsAdding(false)}
-        title="Add a dictionary"
-        description="Choose a language and start a new patch in your garden."
-      >
-        <CreateDictionaryForm
-          languages={languages}
-          isLanguagesPending={isLanguagesPending}
-          languagesError={languagesError}
-          onCancel={() => setIsAdding(false)}
-          onCreated={() => setIsAdding(false)}
-        />
+      <Dialog open={isAdding} onOpenChange={setIsAdding}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add a dictionary</DialogTitle>
+            <DialogDescription>
+              Choose a language and start a new patch in your garden.
+            </DialogDescription>
+          </DialogHeader>
+          <CreateDictionaryForm
+            languages={languages}
+            isLanguagesPending={isLanguagesPending}
+            languagesError={languagesError}
+            onCancel={() => setIsAdding(false)}
+            onCreated={() => setIsAdding(false)}
+          />
+        </DialogContent>
       </Dialog>
     </>
   );
