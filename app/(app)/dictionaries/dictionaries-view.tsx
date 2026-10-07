@@ -12,7 +12,7 @@ import {
   isApiError,
   resolveDictionaryErrorMessage,
   useDictionaryCards,
-} from "@/lib/api";
+} from "@/shared/api";
 
 export function DictionariesView() {
   const router = useRouter();

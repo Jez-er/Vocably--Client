@@ -8,7 +8,7 @@ import { FormError } from "@/components/ui/form-error";
 import { OrDivider } from "@/components/ui/or-divider";
 import { PasswordField } from "@/components/ui/password-field";
 import { TextField } from "@/components/ui/text-field";
-import { applyFieldErrors, resolveAuthErrorMessage, useRegister } from "@/lib/api";
+import { applyFieldErrors, resolveAuthErrorMessage, useRegister } from "@/shared/api";
 import { registerSchema, type RegisterValues } from "@/lib/validations/auth";
 
 const FIELDS = ["email", "displayName", "password"] as const;

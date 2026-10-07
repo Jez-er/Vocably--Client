@@ -4,7 +4,7 @@ import Link from "next/link";
 import { AuthGuard } from "@/components/app/auth-guard";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import { useLogout, useSession } from "@/lib/api/auth/hooks";
+import { useLogout, useSession } from "@/shared/api/auth/hooks";
 
 
 function AppChrome({ children }: { children: React.ReactNode }) {

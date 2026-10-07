@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lora, Figtree } from "next/font/google";
-import { SessionProvider } from "@/lib/api/auth/session-provider";
-import { QueryProvider } from "@/lib/query/provider";
+import { SessionProvider } from "@/shared/api/auth/session-provider";
+import { QueryProvider } from "@/shared/query/provider";
 import "./globals.css";
 
 const lora = Lora({

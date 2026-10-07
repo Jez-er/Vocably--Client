@@ -12,8 +12,8 @@ import {
   resolveDictionaryErrorMessage,
   useCreateDictionary,
   type LanguageResponse,
-} from "@/lib/api";
-import { queryKeys } from "@/lib/query/keys";
+} from "@/shared/api";
+import { queryKeys } from "@/shared/query/keys";
 import {
   createDictionarySchema,
   type CreateDictionaryValues,

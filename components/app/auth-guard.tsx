@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { useSession } from "@/lib/api/auth/hooks";
+import { useSession } from "@/shared/api/auth/hooks";
 
 export function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter();

@@ -9,7 +9,7 @@ import { OrDivider } from "@/components/ui/or-divider";
 import { PasswordField } from "@/components/ui/password-field";
 import { TextField } from "@/components/ui/text-field";
 import { TextLink } from "@/components/ui/text-link";
-import { applyFieldErrors, resolveAuthErrorMessage, useLogin } from "@/lib/api";
+import { applyFieldErrors, resolveAuthErrorMessage, useLogin } from "@/shared/api";
 import { loginSchema, type LoginValues } from "@/lib/validations/auth";
 
 const FIELDS = ["email", "password"] as const;

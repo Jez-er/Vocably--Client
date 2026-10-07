@@ -1,4 +1,4 @@
-import type { DictionaryCard as DictionaryCardData } from "@/lib/api/dictionaries/view";
+import type { DictionaryCard as DictionaryCardData } from "@/shared/api/dictionaries/view";
 
 export function DictionaryCard({
   title,
