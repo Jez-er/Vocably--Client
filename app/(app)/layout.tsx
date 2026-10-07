@@ -1,4 +1,4 @@
-import { AppShell } from "@/components/app/app-shell";
+import { AppShell } from "./_widgets/app-shell";
 
 
 export default function AppLayout({ children }: LayoutProps<"/">) {

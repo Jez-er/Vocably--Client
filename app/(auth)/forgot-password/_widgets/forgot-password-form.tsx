@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { AuthCard } from "@/components/auth/auth-card";
+import { AuthCard } from "../../_widgets/auth-card";
 import { Button } from "@/components/ui/button";
 import { TextField } from "@/components/ui/text-field";
 import { TextLink } from "@/components/ui/text-link";

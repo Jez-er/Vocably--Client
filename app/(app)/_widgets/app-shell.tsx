@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { AuthGuard } from "@/components/app/auth-guard";
+import { AuthGuard } from "./auth-guard";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { useLogout, useSession } from "@/shared/api/auth/hooks";

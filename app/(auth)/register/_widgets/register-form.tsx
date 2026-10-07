@@ -2,32 +2,31 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { GoogleButton } from "@/components/auth/google-button";
+import { GoogleButton } from "../../_widgets/google-button";
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/ui/form-error";
 import { OrDivider } from "@/components/ui/or-divider";
 import { PasswordField } from "@/components/ui/password-field";
 import { TextField } from "@/components/ui/text-field";
-import { TextLink } from "@/components/ui/text-link";
-import { applyFieldErrors, resolveAuthErrorMessage, useLogin } from "@/shared/api";
-import { loginSchema, type LoginValues } from "@/lib/validations/auth";
+import { applyFieldErrors, resolveAuthErrorMessage, useRegister } from "@/shared/api";
+import { registerSchema, type RegisterValues } from "@/lib/validations/auth";
 
-const FIELDS = ["email", "password"] as const;
+const FIELDS = ["email", "displayName", "password"] as const;
 
-export function LoginForm() {
+export function RegisterForm() {
   const {
     register,
     handleSubmit,
     setError,
     formState: { errors },
-  } = useForm<LoginValues>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
+  } = useForm<RegisterValues>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: { email: "", displayName: "", password: "" },
   });
 
-  const { mutate, isPending, error } = useLogin();
+  const { mutate, isPending, error } = useRegister();
 
-  const onSubmit = (values: LoginValues) =>
+  const onSubmit = (values: RegisterValues) =>
     mutate(values, {
       onError: (cause) => {
         applyFieldErrors(cause, setError, FIELDS);
@@ -36,14 +35,16 @@ export function LoginForm() {
 
   return (
     <div className="flex flex-col gap-6 compact:gap-4">
-      <FormError message={error ? resolveAuthErrorMessage(error, "login") : null} />
+      <FormError
+        message={error ? resolveAuthErrorMessage(error, "register") : null}
+      />
       <form
         noValidate
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-5 compact:gap-3.5"
       >
         <TextField
-          id="login-email"
+          id="register-email"
           label="Email"
           type="email"
           autoComplete="email"
@@ -51,20 +52,24 @@ export function LoginForm() {
           error={errors.email?.message}
           {...register("email")}
         />
+        <TextField
+          id="register-display-name"
+          label="Display name"
+          autoComplete="nickname"
+          hint="2 to 16 characters"
+          error={errors.displayName?.message}
+          {...register("displayName")}
+        />
         <PasswordField
-          id="login-password"
+          id="register-password"
           label="Password"
-          autoComplete="current-password"
+          autoComplete="new-password"
+          hint="8 to 20 characters"
           error={errors.password?.message}
           {...register("password")}
         />
-        <div className="-mt-1 flex justify-end">
-          <TextLink href="/forgot-password" className="py-2 text-[15px]">
-            Forgot password?
-          </TextLink>
-        </div>
         <Button type="submit" className="w-full" disabled={isPending}>
-          {isPending ? "Logging in…" : "Log In"}
+          {isPending ? "Creating account…" : "Create account"}
         </Button>
       </form>
 

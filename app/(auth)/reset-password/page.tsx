@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AuthCard } from "@/components/auth/auth-card";
+import { AuthCard } from "../_widgets/auth-card";
 import {
   buttonBaseClass,
   buttonSizeClass,
@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/button";
 import { TextLink } from "@/components/ui/text-link";
 import { cn } from "@/lib/utils";
-import { ResetPasswordForm } from "./reset-password-form";
+import { ResetPasswordForm } from "./_widgets/reset-password-form";
 
 export const metadata: Metadata = {
   title: "Choose a new password",

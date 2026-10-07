@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CreateDictionaryForm } from "@/components/dictionaries/create-dictionary-form";
-import { DictionaryCard } from "@/components/dictionaries/dictionary-card";
+import { CreateDictionaryForm } from "./create-dictionary-form";
+import { DictionaryCard } from "./dictionary-card";
 import { SproutIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/dialog";

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { AuthCard } from "@/components/auth/auth-card";
+import { AuthCard } from "../_widgets/auth-card";
 import { TextLink } from "@/components/ui/text-link";
-import { RegisterForm } from "./register-form";
+import { RegisterForm } from "./_widgets/register-form";
 
 export const metadata: Metadata = {
   title: "Create account",
