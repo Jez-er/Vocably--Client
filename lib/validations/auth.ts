@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-// Mirrors the Spring DTOs exactly: no .trim() transforms, so the client accepts
-// and rejects precisely what @NotBlank / @Email / @Size accept and reject.
 const email = z.email("Enter a valid email address.");
 
 const password = z
@@ -29,7 +27,6 @@ export const resetPasswordSchema = z
   })
   .refine((values) => values.password === values.confirmPassword, {
     message: "Passwords do not match.",
-    // Attach the error to the field the user can actually fix.
     path: ["confirmPassword"],
   });
 

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/logo";
-import { buttonBaseClass, buttonVariantClass } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -12,17 +11,14 @@ export default function Home() {
         <h1 className="font-serif text-3xl font-semibold sm:text-4xl">
           Water your garden
         </h1>
-        <p className="text-base text-muted">
+        <p className="text-base text-muted-foreground">
           Plant your first word and keep growing your vocabulary garden.
         </p>
       </div>
 
-      <Link
-        href="/login"
-        className={cn(buttonBaseClass, buttonVariantClass.primary)}
-      >
-        Start practice
-      </Link>
+      <Button asChild>
+        <Link href="/login">Start practice</Link>
+      </Button>
     </main>
   );
 }

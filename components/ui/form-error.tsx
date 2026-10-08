@@ -1,10 +1,6 @@
-/**
- * Form-level API error. Renders nothing when there is no message, so a caller can pass a possibly
- * undefined value straight through.
- *
- * role="alert" so screen readers announce a failed submit the user did not scroll to.
- */
-export function FormError({ message }: { message?: string | null }) {
+import type { FormErrorProps } from "@/types/ui/form-error";
+
+export function FormError({ message }: FormErrorProps) {
   if (!message) return null;
 
   return (

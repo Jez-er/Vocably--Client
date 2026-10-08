@@ -1,19 +1,7 @@
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-
-export type TextFieldProps = Omit<
-  React.ComponentProps<"input">,
-  "className"
-> & {
-  /** Required: ties the <label> and the aria-describedby ids together. */
-  id: string;
-  label: string;
-  error?: string;
-  hint?: string;
-  /** Rendered inside the field box, against its right edge. */
-  trailing?: React.ReactNode;
-  /** Wrapper layout only — the input's own styling is not overridable. */
-  className?: string;
-};
+import type { TextFieldProps } from "@/types/ui/text-field";
 
 export function TextField({
   id,
@@ -26,8 +14,6 @@ export function TextField({
 }: TextFieldProps) {
   const errorId = `${id}-error`;
   const hintId = `${id}-hint`;
-  // The hint shares the label row, so it stays visible next to an error and
-  // aria-describedby can reference both ids without ever dangling.
   const describedBy =
     [error ? errorId : null, hint ? hintId : null].filter(Boolean).join(" ") ||
     undefined;
@@ -35,26 +21,21 @@ export function TextField({
   return (
     <div className={cn("flex flex-col gap-2", className)}>
       <div className="flex items-baseline justify-between gap-3">
-        <label htmlFor={id} className="text-base font-medium text-foreground">
-          {label}
-        </label>
+        <Label htmlFor={id}>{label}</Label>
         {hint && (
-          <span id={hintId} className="text-sm text-muted">
+          <span id={hintId} className="text-sm text-muted-foreground">
             {hint}
           </span>
         )}
       </div>
 
       <div className="relative">
-        <input
+        <Input
           {...props}
           id={id}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy}
-          className={cn(
-            "h-[52px] w-full rounded-field border border-border bg-surface-input px-[18px] text-base text-foreground placeholder:text-placeholder focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary aria-invalid:border-danger",
-            trailing ? "pr-[52px]" : undefined,
-          )}
+          className={trailing ? "pr-[52px]" : undefined}
         />
         {trailing}
       </div>

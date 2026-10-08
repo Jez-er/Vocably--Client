@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { EyeIcon, EyeOffIcon } from "@/components/icons";
-import { TextField, type TextFieldProps } from "@/components/ui/text-field";
-
-export type PasswordFieldProps = Omit<TextFieldProps, "type" | "trailing">;
+import { Eye, EyeOff } from "lucide-react";
+import { TextField } from "@/components/ui/text-field";
+import type { PasswordFieldProps } from "@/types/ui/text-field";
 
 export function PasswordField(props: PasswordFieldProps) {
   const [visible, setVisible] = useState(false);
@@ -19,12 +18,12 @@ export function PasswordField(props: PasswordFieldProps) {
           onClick={() => setVisible((previous) => !previous)}
           aria-label={visible ? "Hide password" : "Show password"}
           aria-pressed={visible}
-          className="absolute inset-y-0 right-0 flex w-[52px] items-center justify-center rounded-field text-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          className="absolute inset-y-0 right-0 flex w-[52px] items-center justify-center rounded-field text-muted-foreground hover:text-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           {visible ? (
-            <EyeOffIcon className="h-5 w-5" />
+            <EyeOff aria-hidden="true" className="h-5 w-5" />
           ) : (
-            <EyeIcon className="h-5 w-5" />
+            <Eye aria-hidden="true" className="h-5 w-5" />
           )}
         </button>
       }

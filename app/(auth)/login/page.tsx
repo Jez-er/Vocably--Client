@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { AuthCard } from "@/components/auth/auth-card";
+import { AuthCard } from "../_widgets/auth-card";
 import { TextLink } from "@/components/ui/text-link";
-import { LoginForm } from "./login-form";
+import { LoginForm } from "./_widgets/login-form";
 
 export const metadata: Metadata = {
   title: "Log in",

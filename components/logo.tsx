@@ -1,14 +1,18 @@
-import { SproutIcon } from "@/components/icons";
+import { Sprout } from "lucide-react";
 import { cn } from "@/lib/utils";
+import type { LogoProps, LogoSize } from "@/types/logo";
 
-// Static lookup tables: Tailwind cannot see runtime-interpolated class names.
-const MARK = { nav: "h-11 w-11", auth: "h-[52px] w-[52px]" };
-const ICON = { nav: "h-[22px] w-[22px]", auth: "h-[26px] w-[26px]" };
-const WORD = { nav: "text-2xl", auth: "text-[28px]" };
-
-export type LogoProps = {
-  size?: keyof typeof MARK;
-  className?: string;
+const MARK: Record<LogoSize, string> = {
+  nav: "h-11 w-11",
+  auth: "h-[52px] w-[52px]",
+};
+const ICON: Record<LogoSize, string> = {
+  nav: "h-[22px] w-[22px]",
+  auth: "h-[26px] w-[26px]",
+};
+const WORD: Record<LogoSize, string> = {
+  nav: "text-2xl",
+  auth: "text-[28px]",
 };
 
 export function Logo({ size = "nav", className }: LogoProps) {
@@ -20,7 +24,7 @@ export function Logo({ size = "nav", className }: LogoProps) {
           MARK[size],
         )}
       >
-        <SproutIcon className={cn("text-white", ICON[size])} />
+        <Sprout aria-hidden="true" className={cn("text-white", ICON[size])} />
       </span>
       <span className={cn("font-serif font-bold leading-none", WORD[size])}>
         Vocably

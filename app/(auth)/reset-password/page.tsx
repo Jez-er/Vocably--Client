@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AuthCard } from "@/components/auth/auth-card";
-import { buttonBaseClass, buttonVariantClass } from "@/components/ui/button";
+import { AuthCard } from "../_widgets/auth-card";
+import { Button } from "@/components/ui/button";
 import { TextLink } from "@/components/ui/text-link";
-import { cn } from "@/lib/utils";
-import { ResetPasswordForm } from "./reset-password-form";
+import { ResetPasswordForm } from "./_widgets/reset-password-form";
 
 export const metadata: Metadata = {
   title: "Choose a new password",
@@ -24,16 +23,9 @@ export default async function ResetPasswordPage({
         title="This link has expired"
         subtitle="Reset links can only be used once. Ask for a new one to continue."
       >
-        <Link
-          href="/forgot-password"
-          className={cn(
-            buttonBaseClass,
-            buttonVariantClass.primary,
-            "w-full",
-          )}
-        >
-          Request a new link
-        </Link>
+        <Button asChild className="w-full">
+          <Link href="/forgot-password">Request a new link</Link>
+        </Button>
       </AuthCard>
     );
   }

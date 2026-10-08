@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-
-export type TextLinkProps = {
-  href: React.ComponentProps<typeof Link>["href"];
-  children: React.ReactNode;
-  className?: string;
-};
+import type { TextLinkProps } from "@/types/ui/text-link";
 
 export function TextLink({ href, children, className }: TextLinkProps) {
   return (
