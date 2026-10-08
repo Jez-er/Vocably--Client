@@ -2,8 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { CreateDictionaryForm } from "./create-dictionary-form";
-import { DictionaryCard } from "./dictionary-card";
+import { CreateDictionaryForm } from "./_widgets/create-dictionary-form";
+import { DictionaryCard } from "./_widgets/dictionary-card";
 import { Sprout } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {

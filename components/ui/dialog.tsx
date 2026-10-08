@@ -1,29 +1,5 @@
 "use client"
 
-/**
- * shadcn's Dialog, restyled to style-quide.md §5.
- *
- * This replaced a native <dialog> + showModal() implementation. Radix covers what the platform
- * was giving for free — top layer, focus trap, Escape, focus restoration, an outside-press guard
- * that ignores a drag-select released outside, and unmounting the content when closed (which is
- * what resets react-hook-form and mutation state between opens).
- *
- * `showCloseButton` defaults to false here, inverting shadcn. The X would be the first tabbable
- * element in the dialog and would take the initial focus that belongs to the first field, and
- * every dialog in this app has an explicit Cancel in its actions row.
- *
- * Focus restoration on close is the one thing Radix does NOT cover here. It restores focus to a
- * DialogTrigger, but these dialogs are driven by external state — the add-dictionary one is
- * opened from two different buttons — so there is no trigger to go back to and focus lands on
- * <body>, putting a keyboard user back at the top of the page. The tracker below closes that gap
- * for Escape and for an in-dialog close button, which are the keyboard paths.
- *
- * Dismissing by pressing the backdrop still leaves focus on <body>: Radix deliberately does not
- * pull focus back after a pointer press outside, since the user may have been reaching for
- * something else, and overriding that would make focus fight the click. The native <dialog> did
- * restore here, so this is a real if minor difference.
- */
-
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Dialog as DialogPrimitive } from "radix-ui"
@@ -31,25 +7,11 @@ import { Dialog as DialogPrimitive } from "radix-ui"
 import { Button } from "@/components/ui/button"
 import { XIcon } from "lucide-react"
 
-/**
- * The last element focused outside any dialog — i.e. the thing to put focus back on when one
- * closes.
- *
- * Tracked continuously rather than snapshotted when the content mounts: that mount is not tied
- * to the click that opened the dialog, so a render-time or effect-time snapshot reads whatever
- * happens to be focused at mount, which is already the first field inside the dialog.
- *
- * Module-scoped rather than passed through context, because the listener watches `document` and
- * so needs no per-dialog state, and because a single module-level value cannot be desynchronised
- * from the component that reads it.
- */
 let lastFocusedOutsideDialog: HTMLElement | null = null
 
 function trackFocusOutsideDialogs() {
   const onFocusIn = (event: FocusEvent) => {
     const target = event.target as HTMLElement | null
-    // Every dialog part is excluded, not just the content: a backdrop press focuses the overlay,
-    // which is then unmounted, and tracking it would leave nothing to restore to.
     if (target && !target.closest?.('[data-slot^="dialog-"]')) {
       lastFocusedOutsideDialog = target
     }
@@ -62,7 +24,6 @@ function trackFocusOutsideDialogs() {
 function Dialog({
   ...props
 }: React.ComponentProps<typeof DialogPrimitive.Root>) {
-  // Mounted with the page, long before any dialog opens.
   React.useEffect(trackFocusOutsideDialogs, [])
 
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
@@ -193,7 +154,6 @@ function DialogTitle({
     <DialogPrimitive.Title
       data-slot="dialog-title"
       className={cn(
-        // §4: H3-ish, Lora 600. Dialog titles are headings, not UI labels.
         "font-serif text-[26px] leading-tight font-semibold",
         className
       )}

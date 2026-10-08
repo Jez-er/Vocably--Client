@@ -4,8 +4,6 @@ import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { makeQueryClient } from "@/shared/query/query-client";
 
-// A fresh client per server render keeps one request's data out of another's; a single client in
-// the browser keeps the cache alive across re-renders.
 let browserQueryClient: QueryClient | undefined;
 
 function getQueryClient() {

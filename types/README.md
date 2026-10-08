@@ -15,3 +15,23 @@ the schemas they come from. They are not independent declarations; moving them h
 re-exporting `z.infer` from a second place.
 
 Import types from here and values from `@/shared/api`, so each name has exactly one import path.
+
+## api/
+
+One file per server module, typed literally off the Spring records in `com.vocably.<module>.dto`.
+
+Payloads are camelCase throughout (`spring.jackson.property-naming-strategy: LOWER_CAMEL_CASE` in
+`application.yml`), so there is no per-module case handling and no global case transform. A Java
+`Instant` arrives as an ISO-8601 string with an offset.
+
+Declare the whole record even when only one field is read today, as long as the shape is small and
+fully known — a convenient subset invites a second, conflicting declaration later.
+
+Two shapes are deliberately incomplete, and that is the server's doing rather than an omission:
+`DictionaryResponse` has no title, word count or timestamps, so anything displayable has to be
+joined on in `shared/api/dictionaries/view.ts`; and `DictionaryCreateRequest` has no `userId`,
+because the server reads the owner from the access token and a client must not be able to create a
+dictionary for someone else.
+
+`DictionaryView` is named for the join it represents and not after the card that renders it, so
+`dictionary-card.tsx` can import the type unaliased.

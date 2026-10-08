@@ -4,13 +4,6 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Popover as PopoverPrimitive } from "radix-ui"
 
-/**
- * shadcn's Popover with the guide's surface treatment: a 1px #E4E0D4 border instead of a shadow
- * and a ring (style-quide.md §5: "Cards are separated from the background by a 1 px border. No
- * shadows."), and the 12px field radius so a popover reads as continuous with the control it
- * hangs off.
- */
-
 function Popover({
   ...props
 }: React.ComponentProps<typeof PopoverPrimitive.Root>) {

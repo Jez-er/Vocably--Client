@@ -2,8 +2,6 @@ import { Sprout } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { LogoProps, LogoSize } from "@/types/logo";
 
-// Static lookup tables: Tailwind cannot see runtime-interpolated class names. Typed as
-// Record<LogoSize, …> so adding a size to the type fails here until all three are filled in.
 const MARK: Record<LogoSize, string> = {
   nav: "h-11 w-11",
   auth: "h-[52px] w-[52px]",

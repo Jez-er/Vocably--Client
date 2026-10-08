@@ -17,11 +17,6 @@ import {
 } from "@/components/ui/input-group"
 import { SearchIcon, CheckIcon } from "lucide-react"
 
-/**
- * shadcn's Command (cmdk), restyled to the guide: the brand Tint as the selected-row fill (§6,
- * where Tint #E3EBD9 with #465A3A text is the active state), 12px radii, 16px text, and 48px
- * rows so every option clears the §9 touch-target floor.
- */
 function Command({
   className,
   ...props

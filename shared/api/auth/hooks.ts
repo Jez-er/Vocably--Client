@@ -26,7 +26,6 @@ function useAuthSuccess() {
   return (data: AuthResponse) => {
     tokenStore.set(data.tokens.accessToken);
     persistUser(data.user);
-    // Seed the cache so nothing refetches the session we were just handed.
     queryClient.setQueryData(queryKeys.auth.session(), data.user);
     router.push("/");
   };

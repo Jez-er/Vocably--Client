@@ -1,18 +1,6 @@
 import type { DictionaryIntent } from "@/types/api/dictionaries";
 import { isApiError } from "@/shared/api/core/errors";
 
-
-/**
- * Turn an ApiError into copy a user can act on, or null when the caller handles it better itself.
- *
- * The contract for "create" is the non-obvious part: a 400 and a 409 both return **null**, because
- * the create form attaches those to the language field (a 400 through `applyFieldErrors`, a 409 as
- * an explicit message). Returning a string for them too would report the same failure twice —
- * once under the select and once in the form-level alert.
- *
- * Branch on `status` first and use `code` only to disambiguate: a rollback or an intermediary
- * error page can leave `code` undefined, and status-first mapping degrades gracefully.
- */
 export function resolveDictionaryErrorMessage(
   error: unknown,
   intent: DictionaryIntent,

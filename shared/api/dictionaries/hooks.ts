@@ -22,17 +22,6 @@ export function useDictionaries() {
   return useQuery(dictionariesQuery());
 }
 
-/**
- * Everything the dictionaries page renders, from three independent queries.
- *
- * Three `useQuery` calls rather than `useQueries`: they already fetch in parallel, and the words
- * query must be allowed to fail on its own without blanking the grid — which a single combined
- * result makes harder to express, not easier.
- *
- * The grid is gated on dictionaries + languages only. Word counts arrive separately and are
- * reported as `null` until (or unless) they do, so a slow or failed /api/words degrades to "count
- * unavailable" instead of blocking the page or claiming every dictionary is empty.
- */
 export function useDictionaryCards(): {
   cards: DictionaryView[];
   languages: LanguageResponse[];
@@ -74,19 +63,13 @@ export function useCreateDictionary() {
   return useMutation({
     mutationFn: (params: DictionaryCreateRequest) => createDictionary({ params }),
     onSuccess: (created: DictionaryResponse) => {
-      // The 201 carries the complete row, so this is the exact new state rather than a guess —
-      // which is also why there is no optimistic onMutate: it would buy one localhost round trip
-      // at the cost of a fake id, a reconcile step, and a card that pops in and vanishes on the
-      // most likely failure (a duplicate language).
       queryClient.setQueryData<DictionaryResponse[]>(
         queryKeys.dictionaries.list(),
         (previous) => (previous ? [...previous, created] : [created]),
       );
-      // findAllByUserId has no ORDER BY, so refetch to settle on whatever order the server uses.
       void queryClient.invalidateQueries({
         queryKey: queryKeys.dictionaries.list(),
       });
-      // Not words (a new dictionary has none) and not languages (a seeded, static catalogue).
     },
   });
 }

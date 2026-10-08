@@ -106,8 +106,7 @@ export function CreateDictionaryForm({
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col gap-5 compact:gap-4"
       >
-        {/* A combobox is not a native form control, so it goes through Controller rather than
-            register(). */}
+
         <Controller
           control={control}
           name="languageCode"

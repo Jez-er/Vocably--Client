@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { DictionariesView } from "./_widgets/dictionaries-view";
+import { DictionariesView } from "./dictionaries-view";
 
 export const metadata: Metadata = {
   title: "Dictionaries",

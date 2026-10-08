@@ -1,12 +1,6 @@
 import type { RequestOptions } from "@astralis-os/notfetch";
 import type { RequestContext } from "@/types/api/core";
 
-/**
- * Mark a request as public: no Bearer token, and a 401 is not treated as "refresh and retry".
- *
- * Used by the /auth/* endpoints, which are permitAll server-side. Caller-supplied context wins, so
- * a call site can still override a flag.
- */
 export function publicRequest(config?: RequestOptions): RequestOptions {
   return {
     ...config,

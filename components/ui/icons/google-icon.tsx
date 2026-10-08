@@ -1,11 +1,3 @@
-/**
- * Third-party brand marks live in this folder. Everything else comes from lucide-react.
- *
- * This one necessarily breaks style-quide.md §7 ("line icons … no gradient fills"): Google's
- * brand guidelines require the official four-colour mark, so it is a `fill`-based 48x48 glyph
- * rather than a 24x24 2px-stroke line icon. That is the reason it is hand-written rather than
- * imported, and the reason it is here rather than in a general icon module.
- */
 export function GoogleIcon(props: React.ComponentProps<"svg">) {
   return (
     <svg viewBox="0 0 48 48" aria-hidden="true" {...props}>

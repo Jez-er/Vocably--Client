@@ -1,14 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-/**
- * shadcn's Input, restyled to style-quide.md §6 Inputs: 52px tall, the #F3F0E8 field fill, a 1px
- * #E4E0D4 border, 12px radius and 18px of horizontal padding.
- *
- * Departures from the generated file: no shadow (§5), the Vocably focus outline rather than
- * shadcn's 3px ring (so a field focuses like every other control in the app), and no `md:text-sm`
- * — the guide puts body text at 16–17px and does not shrink it on wider screens.
- */
 function Input({ className, type, ...props }: React.ComponentProps<"input">) {
   return (
     <input

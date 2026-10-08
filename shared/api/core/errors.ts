@@ -1,40 +1,13 @@
 import type { ApiErrorKind } from "@/types/api/core";
 import { ResponseError, type NotFetchResponse } from "@astralis-os/notfetch";
 
-
-/**
- * The single error type the whole data layer throws.
- *
- * Normalising is not optional here. The server has two mutually incompatible error bodies — the
- * 401 from JwtAuthenticationEntryPoint is `{status, error, message, path}` with no `timestamp`,
- * while every other failure gets Boot's default `{timestamp, status, error, path}` with no
- * `message` — and notfetch awaits fetch() *before* its response interceptors, so an offline
- * TypeError never reaches them at all.
- */
 export class ApiError extends Error {
-  /** HTTP status, or 0 when the request never got a response. */
   readonly status: number;
   readonly kind: ApiErrorKind;
-  /** The server's `error` field, e.g. "Unauthorized", "Bad Request". */
   readonly statusText?: string;
   readonly path?: string;
-  /** The `message` field. Only the 401 body carries one. */
   readonly serverMessage?: string;
-  /**
-   * The server's machine-readable `ErrorCode` — VALIDATION_FAILED, CONFLICT, NOT_FOUND and so on.
-   *
-   * Several distinct failures share a status (409 is both CONFLICT and EMAIL_ALREADY_USED), so this
-   * disambiguates them. Branch on `status` first and use `code` only to narrow: an intermediary
-   * error page or a rollback leaves it undefined.
-   */
   readonly code?: string;
-  /**
-   * Per-field validation messages, keyed by form field name.
-   *
-   * These now populate: the server has a @RestControllerAdvice that maps
-   * MethodArgumentNotValidException to real per-field messages on a 400 VALIDATION_FAILED. The key
-   * is the Java record component name, so a form field has to be named to match it.
-   */
   readonly fieldErrors: Record<string, string>;
 
   constructor(
@@ -66,22 +39,10 @@ export function isApiError(error: unknown): error is ApiError {
   return error instanceof ApiError;
 }
 
-/**
- * Whether a 401 is Spring masking some *other* failure rather than a real authentication problem.
- *
- * The server does not list `/error` under permitAll, so any exception — a validation failure, a
- * duplicate email, a bad password, a service bug — gets forwarded to `/error`, arrives there
- * unauthenticated, and comes back from JwtAuthenticationEntryPoint as a generic 401. The only thing
- * that distinguishes it from a genuine 401 is the `path`: a real one names the route that was
- * called, a masked one always says "/error".
- *
- * TODO(server): delete this once `/error` is permitAll and a @ControllerAdvice returns real codes.
- */
 export function isMaskedServerError(error: unknown): boolean {
   return isApiError(error) && error.status === 401 && error.path === "/error";
 }
 
-/** React Query treats AbortError as a cancellation, so it must stay exactly as it is. */
 export function isAbortError(error: unknown): boolean {
   return error instanceof Error && error.name === "AbortError";
 }
@@ -97,14 +58,12 @@ type ServerErrorBody = {
 
 function readBody(data: unknown): ServerErrorBody {
   if (typeof data === "string") {
-    // Some endpoints answer text/plain, and a body-less 204 parses to undefined.
     return data ? { message: data } : {};
   }
 
   return data && typeof data === "object" ? (data as ServerErrorBody) : {};
 }
 
-/** Build an ApiError from a response that carries a non-2xx status. */
 export function apiErrorFromResponse(
   response: NotFetchResponse<unknown>,
 ): ApiError {
@@ -125,12 +84,6 @@ export function apiErrorFromResponse(
   );
 }
 
-/**
- * Normalise anything thrown by the transport into an ApiError.
- *
- * Rethrows AbortError untouched, and passes an existing ApiError straight through so wrapping
- * twice is a no-op.
- */
 export function toApiError(error: unknown): ApiError {
   if (isAbortError(error)) throw error;
   if (isApiError(error)) return error;
@@ -139,7 +92,6 @@ export function toApiError(error: unknown): ApiError {
     return apiErrorFromResponse(error.response);
   }
 
-  // fetch() rejects with a TypeError for DNS failures, a dropped connection and offline.
   if (error instanceof TypeError) {
     return new ApiError("Could not reach the server.", {
       status: 0,
@@ -154,12 +106,6 @@ export function toApiError(error: unknown): ApiError {
   );
 }
 
-/**
- * Push an ApiError's field errors into a react-hook-form `setError`.
- *
- * Returns true when it handled at least one field, so a caller can fall back to a form-level
- * message.
- */
 export function applyFieldErrors<Field extends string>(
   error: unknown,
   setError: (field: Field, error: { type: string; message: string }) => void,

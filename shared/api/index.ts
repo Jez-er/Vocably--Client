@@ -1,15 +1,3 @@
-/**
- * Public surface of the data layer: values only.
- *
- * Types are NOT re-exported here. They live in `@/types/api/*` and are imported from there, so a
- * type has exactly one import path — the whole point of having a types/ folder. The rule is
- * "types from @/types, values from @/shared/api".
- *
- * This barrel is a convenience for the one-line imports in forms, not a wall. Reaching into a
- * module directly is correct where the barrel would cost something: `app/layout.tsx` imports
- * `@/shared/api/auth/session-provider` on its own, because going through here would pull every
- * endpoint module and notfetch into the root layout's graph and widen the client boundary.
- */
 
 export { api, refreshAccessToken } from "@/shared/api/core/client";
 export { http } from "@/shared/api/core/http";

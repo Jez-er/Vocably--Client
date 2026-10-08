@@ -5,14 +5,6 @@ import type {
 import type { LanguageResponse } from "@/types/api/languages";
 import type { WordResponse } from "@/types/api/words";
 
-/**
- * Pure derivations for the dictionaries page. No React, no React Query.
- *
- * These live outside the hooks on purpose. A dictionary on its own is only {id, userId,
- * languageCode}, so everything the UI shows is a join across three endpoints — and a join across
- * three cache entries cannot honestly live in any single query's `select`.
- */
-
 export function countWordsByDictionary(
   words: readonly WordResponse[],
 ): Map<string, number> {
@@ -25,13 +17,6 @@ export function countWordsByDictionary(
   return counts;
 }
 
-/**
- * Join dictionaries to their language, and to a word count when one is available.
- *
- * `wordCounts` is nullable so the grid can render as soon as dictionaries and languages resolve,
- * rather than waiting on (or being blanked by) the word list. A dictionary missing from the map
- * genuinely has no words, so it counts 0 — the "unknown" case is the whole map being absent.
- */
 export function toDictionaryCards(
   dictionaries: readonly DictionaryResponse[],
   languages: readonly LanguageResponse[],
@@ -45,8 +30,6 @@ export function toDictionaryCards(
     return {
       id: dictionary.id,
       languageCode: dictionary.languageCode,
-      // dictionaries.language_code is a foreign key to languages(code), so a miss should be
-      // impossible; falling back to the code keeps a card readable if that ever changes.
       title: language?.title ?? dictionary.languageCode.toUpperCase(),
       flag: language?.flag ?? "",
       wordCount: wordCounts ? (wordCounts.get(dictionary.id) ?? 0) : null,
@@ -54,15 +37,6 @@ export function toDictionaryCards(
   });
 }
 
-/**
- * The languages the user can still add, sorted by title.
- *
- * Owned languages are removed rather than disabled: the server rejects a duplicate with a 409, a
- * disabled row in a 162-option list is noise the user cannot act on, and several mobile pickers
- * render disabled options indistinguishably from enabled ones.
- *
- * The sort is not optional — LanguageRepository.findAll() has no ORDER BY.
- */
 export function availableLanguages(
   languages: readonly LanguageResponse[],
   dictionaries: readonly DictionaryResponse[],

@@ -20,10 +20,6 @@ export function ResetPasswordForm({ token }: { token: string }) {
   });
 
   const onSubmit = async (values: ResetPasswordValues) => {
-    // TODO(server): no password-reset endpoint exists yet. Once
-    // POST /api/auth/reset-password { token, password } exists, add it to
-    // lib/api/auth/endpoints.ts and send `token` (the prop) with values.password.
-    // Never log or display the token itself.
     console.info("reset submit", {
       hasToken: Boolean(token),
       length: values.password.length,
